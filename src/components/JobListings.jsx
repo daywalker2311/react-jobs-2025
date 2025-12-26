@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import JobListing from './JobListing';
+import Spinner from './Spinner';
 
 const JobListings = ({ isHome = false}) => {
     const [jobListings, setJobListings] = useState([]);
@@ -10,7 +11,7 @@ const JobListings = ({ isHome = false}) => {
             try {
                 const res = await fetch('http://localhost:8000/jobs');
                 const data = await res.json();
-                setJobListings(data);
+                setJobListings(isHome ? data.slice(0, 3) : data);
             } catch (error) {
                 console.error("Error fetching job listings:", error);
             } finally {
@@ -29,16 +30,16 @@ const JobListings = ({ isHome = false}) => {
             </h2>
             {
                 loading ? (
-                        <p className='text-center'>Loading job listings...</p>
-                    ) : (
-                        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-                        {
-                            jobListings.map((job) => (
-                                <JobListing key={job.id} job={job} />
-                            ))
-                        }
-                    </div>
-                )
+                            <Spinner loading={loading} />
+                        ) : (
+                            <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                            {
+                                jobListings.map((job) => (
+                                    <JobListing key={job.id} job={job} />
+                                ))
+                            }
+                        </div>
+                        )
             }
         </div>
     </section>
