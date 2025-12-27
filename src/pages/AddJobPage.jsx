@@ -1,6 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const AddJobPage = () => {
+const AddJobPage = ({ onAddJobSubmit}) => {
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [type, setType] = React.useState('Full-Time');
@@ -10,6 +11,8 @@ const AddJobPage = () => {
     const [companyDescription, setCompanyDescription] = React.useState('');
     const [contactEmail, setContactEmail] = React.useState('');
     const [contactPhone, setContactPhone] = React.useState('');
+
+    const navidate = useNavigate();
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -28,7 +31,9 @@ const AddJobPage = () => {
             }
         }
 
-        console.log('Submitting job:', newJob);
+        onAddJobSubmit(newJob);
+
+        return navidate('/jobs');
     };
 
   return (
