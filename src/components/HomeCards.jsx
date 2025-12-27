@@ -23,7 +23,7 @@ const HomeCards = () => {
                     <p className='mt-2 mb-4'>
                         List your React job openings and find the perfect candidate today!
                     </p>
-                    <a href='jobs.html' className='text-indigo-600 font-semibold hover:underline'>
+                    <a href='/add-job' className='text-indigo-600 font-semibold hover:underline'>
                         Add Job &rarr;
                     </a>
                 </Card>
